@@ -6,14 +6,13 @@ var limit : int = 10000000
 
 var thread : Thread
 var threads : Array[Thread]
-var number_of_thread : int = 10
+var number_of_thread : int = 16
 
 var thread_id
 
 var Mutex_prime_function : Mutex = Mutex.new()
 
 var primes := PackedInt32Array([2])
-
 
 
 
@@ -47,8 +46,9 @@ func primes_up_to(limit: int,new_thread:Thread) -> void:
 		print(" THREAD ID = " + str(thread_id) + " tiempo de calculado = " + str(thread_calculation_final))
 		
 	if not new_thread:
-		var thread_calculation_final : float = (Time.get_ticks_msec() - thread_calculation_t0) / 1000
-		print(" MAIN THREAD  = " + "tiempo de calculado = " + str(thread_calculation_final))
+		var main_calculation_final : float = (Time.get_ticks_msec() - thread_calculation_t0) / 1000
+		print(" MAIN THREAD  = " + "tiempo de calculado = " + str(main_calculation_final))
+		
 		
 func _enter_tree() -> void:
 	for thread in threads:
@@ -59,7 +59,7 @@ func _on_start_main_pressed() -> void:
 	var total_time : float 
 	var t0:float = Time.get_ticks_msec()
 	
-	for i in 10:
+	for i in 16:
 		var new_thread = null
 		primes_up_to(limit,new_thread)
 	total_time = (Time.get_ticks_msec() - t0) / 1000
@@ -68,8 +68,7 @@ func _on_start_main_pressed() -> void:
 
 
 func _on_start_prime_search_pressed() -> void:
-	var total_time : float 
-	var t0:float = Time.get_ticks_msec()
+	var t0 : float = Time.get_ticks_msec()
 	
 	for i in number_of_thread:
 		
@@ -80,5 +79,5 @@ func _on_start_prime_search_pressed() -> void:
 	for thread in threads:
 		thread.wait_to_finish()
 		
-	total_time = (Time.get_ticks_msec() - t0) / 1000
-	print("THREAD TOTAL TIME = " + str(total_time))
+	var thread_total_calculation_time = (Time.get_ticks_msec() - t0) / 1000
+	print("THREAD TOTAL TIME = " + str(thread_total_calculation_time))
