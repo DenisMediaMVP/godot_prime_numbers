@@ -44,7 +44,7 @@ func primes_up_to(limit: int,new_thread:Thread) -> void:
 	if new_thread:
 		var thread_id = new_thread.get_id()
 		var thread_calculation_final : float = (Time.get_ticks_msec() - thread_calculation_t0) / 1000
-		print(" THREAD ID = " + str(thread_id) + "tiempo de calculado = " + str(thread_calculation_final))
+		print(" THREAD ID = " + str(thread_id) + " tiempo de calculado = " + str(thread_calculation_final))
 		
 	if not new_thread:
 		var thread_calculation_final : float = (Time.get_ticks_msec() - thread_calculation_t0) / 1000
