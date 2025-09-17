@@ -80,3 +80,4 @@ func _on_start_prime_search_pressed() -> void:
 		
 	time_elapsed = (Time.get_ticks_msec() - t0) / 1000
 	print("THREAD TOTAL TIME = " + str(time_elapsed))
+#sfsdfds
