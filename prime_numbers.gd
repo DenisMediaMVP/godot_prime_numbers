@@ -6,7 +6,7 @@ var limit : int = 10000000
 
 var thread : Thread
 var threads : Array[Thread]
-var number_of_thread : int = 16
+var number_of_thread : int = 3
 
 var thread_id
 
@@ -17,12 +17,12 @@ var primes := PackedInt32Array([2])
 
 
 
-func primes_up_to(limit: int,new_thread:Thread) -> void:
+func primes_up_to(limit: int,new_thread:Thread) -> PackedInt32Array:
 	var thread_calculation_t0 : float = Time.get_ticks_msec()
 	
 	if limit < 2:
 		return PackedInt32Array()
-	var size := (limit - 1) / 2                 # only odds (map 2*i+3)
+	var size : float = (limit - 1) / 2                 # only odds (map 2*i+3)
 	var sieve := PackedByteArray()
 	sieve.resize(size)
 	var root := int(sqrt(limit))
@@ -49,17 +49,14 @@ func primes_up_to(limit: int,new_thread:Thread) -> void:
 		var main_calculation_final : float = (Time.get_ticks_msec() - thread_calculation_t0) / 1000
 		print(" MAIN THREAD  = " + "tiempo de calculado = " + str(main_calculation_final))
 		
-		
-func _enter_tree() -> void:
-	for thread in threads:
-		thread.wait_to_finish()
+	return primes
 
 
 func _on_start_main_pressed() -> void:
 	var total_time : float 
 	var t0:float = Time.get_ticks_msec()
 	
-	for i in 16:
+	for i in number_of_thread:
 		var new_thread = null
 		primes_up_to(limit,new_thread)
 	total_time = (Time.get_ticks_msec() - t0) / 1000
