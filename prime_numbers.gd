@@ -6,7 +6,7 @@ var limit : int = 10000000
 
 var thread : Thread
 var threads : Array[Thread]
-var number_of_thread : int = 3
+var number_of_thread : int = 10
 
 var thread_id
 
@@ -22,7 +22,7 @@ func primes_up_to(limit: int,new_thread:Thread) -> PackedInt32Array:
 	
 	if limit < 2:
 		return PackedInt32Array()
-	var size : float = (limit - 1) / 2                 # only odds (map 2*i+3)
+	var size : float = (limit - 1) / 2              
 	var sieve := PackedByteArray()
 	sieve.resize(size)
 	var root := int(sqrt(limit))
@@ -30,7 +30,7 @@ func primes_up_to(limit: int,new_thread:Thread) -> PackedInt32Array:
 	while 2*i + 3 <= root:
 		if sieve[i] == 0:
 			var p := 2*i + 3
-			var start := (p*p - 3) >> 1         # index of p*p
+			var start := (p*p - 3) >> 1       
 			for j in range(start, size, p):
 				sieve[j] = 1
 		i += 1
