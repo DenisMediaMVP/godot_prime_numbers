@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgmsyo110legx"]
+
+[ext_resource type="Script" uid="uid://ctk4xjxn6i1qb" path="res://prime_numbers.gd" id="1_it4nf"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_it4nf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartMain" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "START MAIN"
+
+[node name="StartPrimeSearch" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "START  THREADS"
+
+[connection signal="pressed" from="VBoxContainer/StartMain" to="." method="_on_start_main_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartPrimeSearch" to="." method="_on_start_prime_search_pressed"]
